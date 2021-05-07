@@ -1,1 +1,32 @@
-<p>add works!</p>
+<div id="add">
+  <a class="return" [routerLink]="['']">
+    <i class="arrow-left"></i>
+    <span>Return to List</span>
+  </a>
+  <div class="add-form">
+    <div class="add-form__title">
+      <h1>Add New Link</h1>
+    </div>
+    <div class="add-form__content">
+      <form class="add-form__content__form">
+        <div class="add-form__content__form__item">
+          <label for="linkName">Link Name:</label>
+          <input
+            type="text"
+            id="linkName"
+            placeholder="e.g. Alphabet">
+        </div>
+        <div class="add-form__content__form__item">
+          <label for="linkUrl">Link URL:</label>
+          <input
+            type="text"
+            id="linkUrl"
+            placeholder="e.g. https://abc.xyz">
+        </div>
+        <div class="add-form__content__form__item right">
+          <input type="submit" value="ADD">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

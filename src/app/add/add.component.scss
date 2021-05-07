@@ -1,0 +1,26 @@
+#add {
+  .return {
+    display: flex;
+    line-height: 24px;
+    font-size: 20px;
+    i {
+      margin-right: 4px;
+    }
+  }
+  .add-form {
+    margin-bottom: 30px;
+    &__title {
+      font-size: 22px;
+    }
+    &__content {
+      &__form {
+        &__item {
+          margin-bottom: 25px;
+          &.right {
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+}
