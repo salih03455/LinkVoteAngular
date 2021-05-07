@@ -28,10 +28,13 @@ input {
   &[type=text] {
     border: 1px solid #979797;
     border-radius: 5px;
-    padding: 15px 12px;
+    padding: 15px;
     width: 100%;
     font-size: 18px;
     font-weight: 300;
+    &.error {
+      border-color: #ff0000;
+    }
   }
   &[type=submit] {
     background-color: #000;

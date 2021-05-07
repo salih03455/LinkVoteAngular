@@ -8,20 +8,52 @@
       <h1>Add New Link</h1>
     </div>
     <div class="add-form__content">
-      <form class="add-form__content__form">
+      <form
+        class="add-form__content__form"
+        [formGroup]="addLinkForm"
+        (ngSubmit)="onSubmit()">
         <div class="add-form__content__form__item">
           <label for="linkName">Link Name:</label>
           <input
             type="text"
             id="linkName"
-            placeholder="e.g. Alphabet">
+            formControlName="linkName"
+            [ngClass]="{ 'error': submitted && f.linkName.errors }"
+            placeholder="e.g. Alphabet"
+          />
+          <div
+            *ngIf="f.linkName.errors && submitted"
+            class="add-form__content__form__item__error">
+            <div *ngIf="f.linkName.errors?.required">
+              Link Name is required.
+            </div>
+            <div *ngIf="f.linkName.errors?.minlength">
+              Minimum 4 character are required.
+            </div>
+          </div>
         </div>
         <div class="add-form__content__form__item">
           <label for="linkUrl">Link URL:</label>
           <input
             type="text"
             id="linkUrl"
-            placeholder="e.g. https://abc.xyz">
+            formControlName="linkUrl"
+            [ngClass]="{ 'error': submitted && f.linkUrl.errors }"
+            placeholder="e.g. https://abc.xyz"
+          />
+          <div
+            *ngIf="submitted && (f.linkUrl.errors || sameLink)"
+            class="add-form__content__form__item__error">
+            <div *ngIf="f.linkUrl.errors?.required">
+              Link Url is required.
+            </div>
+            <div *ngIf="f.linkUrl.errors?.minlength">
+              Minimum 6 character are required.
+            </div>
+            <div *ngIf="sameLink">
+              This link has been used before.
+            </div>
+          </div>
         </div>
         <div class="add-form__content__form__item right">
           <input type="submit" value="ADD">
