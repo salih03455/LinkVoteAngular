@@ -1,5 +1,5 @@
 import { Action, createReducer, on }  from '@ngrx/store';
-import { SetLinks } from './links.actions';
+import { SetLinks, SetLink } from './links.actions';
 import { Link } from '../../models/link';
 
 export const initialState: Link[] = [];
@@ -11,12 +11,12 @@ const _linkReducer = createReducer(
       [...payload]
     )
   ),
-  // on(
-  //   UpdateNotificationStatus, (state, { payload }) => ({
-  //     ...state,
-  //     status: payload
-  //   })
-  // )
+  on(
+    SetLink, (state, { payload }) => ([
+      ...state,
+      payload
+    ])
+  )
 );
 
  export function linkReducer(state: Link[] | undefined, action: Action) {

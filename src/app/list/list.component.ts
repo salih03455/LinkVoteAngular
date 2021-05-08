@@ -1,5 +1,10 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewEncapsulation
+} from '@angular/core';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { SetLinks } from '../store/links/links.actions';
 import { GetLinks } from '../store/links/links.selectors';
@@ -10,16 +15,17 @@ import { GetLinks } from '../store/links/links.selectors';
   styleUrls: ['./list.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store) {}
 
   linkList$ = new BehaviorSubject<any>([]);
+  subscription: Subscription;
 
   ngOnInit(): void {
     // store'a bak:
     const linksOfState = this.store.pipe(select(GetLinks));
-    linksOfState.subscribe(
+    this.subscription = linksOfState.subscribe(
       (links) => {
         if (links.length) {
           this.linkList$.next(links);
@@ -40,5 +46,9 @@ export class ListComponent implements OnInit {
       },
       (error) => console.log(error)
     );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

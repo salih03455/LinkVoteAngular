@@ -1,3 +1,18 @@
 <div id="link">
-  {{ link.linkName }}
+  <div class="link-left">
+    <span>{{ link.linkVote }}</span>
+    <span>POINTS</span>
+  </div>
+  <div class="link-right">
+    <div class="link-right__title">
+      {{ link.linkName }}
+    </div>
+    <div class="link-right__url">
+      ({{ link.linkUrl }})
+    </div>
+    <div class="link-right__vote-buttons">
+      <div class="link-right__vote-buttons__up">Up Vote</div>
+      <div class="link-right__vote-buttons__down">Down Vote</div>
+    </div>
+  </div>
 </div>

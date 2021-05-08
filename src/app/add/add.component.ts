@@ -1,7 +1,11 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { UpdateNotification, UpdateNotificationStatus } from '../store/notifications/notification.actions';
+import { SetLink } from '../store/links/links.actions';
+import {
+  UpdateNotification,
+  UpdateNotificationStatus
+} from '../store/notifications/notification.actions';
 
 @Component({
   selector: 'app-add',
@@ -47,7 +51,7 @@ export class AddComponent implements OnInit {
       return;
     }
 
-    const formValue = this.addLinkForm.value;
+    const formValue = { ...this.addLinkForm.value, linkVote: 5 };
     const linksOfStored = localStorage.getItem('LinkVoteLinks');
     // local storage'de kayit varsa:
     if (linksOfStored) {
@@ -75,6 +79,11 @@ export class AddComponent implements OnInit {
           type: 'success'
         }
       })
+    );
+
+    // Store'daki link listesini guncelle:
+    this.store.dispatch(
+      SetLink({ payload: formValue })
     );
 
     // Notification'u ekrandan kaldir:

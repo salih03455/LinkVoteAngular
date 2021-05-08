@@ -1,0 +1,23 @@
+$border-color: #979797;
+
+%box {
+  border-radius: 5px;
+  background-color: #ececec;
+  width: 100px;
+  height: 100px;
+  border: 1px solid $border-color;
+}
+
+%line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+}
+
+@mixin line-clamp($property) {
+  display: -webkit-box;
+  -webkit-line-clamp: $property;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+}

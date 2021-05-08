@@ -1,0 +1,50 @@
+@import '../../../assets/styles/variables.scss';
+
+#link {
+  display: flex;
+  margin-bottom: 30px;
+  .link-left {
+    @extend %box;
+    margin-right: 30px;
+    position: relative;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    span {
+      &:first-child {
+        font-weight: 700;
+        font-size: 30px;
+        line-height: 35px;
+      }
+      &:last-child {
+        font-weight: 300;
+        font-size: 17px;
+        line-height: 22px;
+      }
+    }
+  }
+  .link-right {
+    flex-grow: 1;
+    &__title {
+      font-size: 25px;
+      @include line-clamp(1);
+    }
+    &__url {
+      font-weight: 300;
+      color: #7b7b7b;
+      line-height: 24px;
+      margin-bottom: 15px;
+      @include line-clamp(1);
+    }
+    &__vote-buttons {
+      display: flex;
+      color: #7b7b7b;
+      font-size: 15px;
+      &__up {
+        margin-right: 100px;
+      }
+    }
+  }
+}
