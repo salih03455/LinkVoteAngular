@@ -16,6 +16,7 @@ import * as notificationReducer from './store/notifications/notification.reducer
 // Redux devtools icin (1):
 import { environment } from '../environments/environment.prod';
 import { SortSelectComponent } from './list/sort-select/sort-select.component';
+import { LinkComponent } from './list/link/link.component';
 
 // STATES:
 
@@ -26,7 +27,8 @@ import { SortSelectComponent } from './list/sort-select/sort-select.component';
     AddComponent,
     AddLinkComponent,
     NotificationsComponent,
-    SortSelectComponent
+    SortSelectComponent,
+    LinkComponent
   ],
   imports: [
     BrowserModule,

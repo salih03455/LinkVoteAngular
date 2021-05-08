@@ -1,5 +1,5 @@
 export interface Link {
-  title: string;
-  url: string;
-  vote: number;
+  linkName: string;
+  linkUrl: string;
+  linkVote: number;
 }

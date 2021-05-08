@@ -3,8 +3,8 @@
   <hr>
   <app-sort-select></app-sort-select>
   <div class="links">
-    <div *ngFor="let link of (linkList$ | async)" class="link">
-      {{ link.linkName }}
-    </div>
+    <ng-container *ngFor="let link of (linkList$ | async)">
+      <app-link [link]="link"></app-link>
+    </ng-container>
   </div>
 </div>

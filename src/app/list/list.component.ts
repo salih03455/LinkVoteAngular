@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { SetLinks } from '../store/links/links.actions';
 
 @Component({
   selector: 'app-list',
@@ -9,14 +11,24 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class ListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store) {}
+
   linkList$ = new BehaviorSubject<any>([]);
 
   ngOnInit(): void {
-    // local storage'ye bak:
+    // locale storage'ye bak:
     const linksOfStored = localStorage.getItem('LinkVoteLinks');
+    // locale storage'de kayit varsa state'ye aktar:
     if (!linksOfStored) return;
-    this.linkList$.next(JSON.parse(linksOfStored));
+      const links = JSON.parse(linksOfStored);  
+      // Notification icin store'u guncelle:
+        this.store.dispatch(
+          SetLinks({
+            payload: links
+          })
+        );
+          
+    this.linkList$.next(links);
   }
 
 }
