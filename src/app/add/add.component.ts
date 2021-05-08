@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { UpdateNotification } from '../store/notifications/notification.actions';
 
 @Component({
   selector: 'app-add',
@@ -9,7 +11,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class AddComponent implements OnInit {
 
-  constructor(public formBuilder: FormBuilder) { }
+  constructor(
+    public formBuilder: FormBuilder,
+    private store: Store
+    ) { }
 
   addLinkForm: FormGroup;
   submitted = false;
@@ -47,7 +52,7 @@ export class AddComponent implements OnInit {
     // local storage'de kayit varsa:
     if (linksOfStored) {
       this.sameLink = JSON.parse(linksOfStored).some(
-        link => link.linkName === formValue.linkName
+        link => link.linkUrl === formValue.linkUrl
       );
       // ayni link daha once kaydedildiyse tekrar kaydetme:
       if (this.sameLink) {
@@ -60,6 +65,18 @@ export class AddComponent implements OnInit {
       // kayit yoksa ilk kaydi ekle
       localStorage.setItem('LinkVoteLinks', JSON.stringify([formValue]));
     }
+
+    // Notification icin store'u guncelle:
+    this.store.dispatch(
+      UpdateNotification({
+        payload: {
+          status: true,
+          title: formValue.linkName,
+          function: 'added'
+        }
+      })
+    );
+
     this.sameLink = false;
   }
 }
