@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { UpdateNotification } from '../store/notifications/notification.actions';
+import { UpdateNotification, UpdateNotificationStatus } from '../store/notifications/notification.actions';
 
 @Component({
   selector: 'app-add',
@@ -56,7 +56,6 @@ export class AddComponent implements OnInit {
       );
       // ayni link daha once kaydedildiyse tekrar kaydetme:
       if (this.sameLink) {
-        console.log('bu link zaten kayit edilmis');
         return;
       }
       const newLinksOfStored = [...JSON.parse(linksOfStored), formValue];
@@ -72,11 +71,22 @@ export class AddComponent implements OnInit {
         payload: {
           status: true,
           title: formValue.linkName,
-          function: 'added'
+          function: 'added',
+          type: 'success'
         }
       })
     );
 
-    this.sameLink = false;
+    // Notification'u ekrandan kaldir:
+    setTimeout(() => {
+      this.store.dispatch(
+        UpdateNotificationStatus({
+          payload: false
+        })
+      );
+    }, 3000);
+
+    this.submitted = false;
+    this.addLinkForm.reset();
   }
 }

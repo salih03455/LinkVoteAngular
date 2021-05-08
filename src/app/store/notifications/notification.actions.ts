@@ -5,3 +5,8 @@ export const UpdateNotification = createAction(
   '[Notification] Save',
   props<{ payload: Notification }>()
 );
+
+export const UpdateNotificationStatus = createAction(
+  '[Notification] Status Change',
+  props<{ payload: boolean }>()
+);

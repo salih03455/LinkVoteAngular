@@ -1,3 +1,6 @@
-<div id="notification">
-  notification {{ (notification$ | async).title }}
+<div
+  id="notification"
+  *ngIf="(notification$ | async).status"
+  [class]="(notification$ | async).type">
+  <b>{{ (notification$ | async).title }}</b> {{ (notification$ | async).function }}
 </div>

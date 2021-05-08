@@ -1,11 +1,12 @@
 import { Action, createReducer, on }  from '@ngrx/store';
-import { UpdateNotification } from './notification.actions';
+import { UpdateNotification, UpdateNotificationStatus } from './notification.actions';
 import { Notification } from '../../models/notification';
 
 export const initialState: Notification = {
   status: false,
   title: '',
-  function: ''
+  function: '',
+  type: '',
 };
 
 const _notificationReducer = createReducer(
@@ -14,10 +15,16 @@ const _notificationReducer = createReducer(
     UpdateNotification, (state, { payload }) => ({
       status: payload.status,
       title: payload.title,
-      function: payload.function
+      function: payload.function,
+      type: payload.type
     })
   ),
-  // on(ClearNotification, () => initialState)
+  on(
+    UpdateNotificationStatus, (state, { payload }) => ({
+      ...state,
+      status: payload
+    })
+  )
 );
 
  export function notificationReducer(state: Notification | undefined, action: Action) {

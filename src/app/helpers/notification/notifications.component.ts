@@ -17,10 +17,12 @@ import { getNotification } from 'src/app/store/notifications/notification.select
 export class NotificationsComponent implements OnInit {
 
   constructor(private store: Store) {}
+  
   notification$: Observable<Notification>;
 
   ngOnInit(): void {
     // state'yi getir:
     this.notification$ = this.store.pipe(select(getNotification));
   }
+  
 }
