@@ -11,7 +11,8 @@ import { ListComponent } from './list/list.component';
 import { AddLinkComponent } from './list/add-link/add-link.component';
 import { NotificationsComponent } from './helpers/notification/notifications.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import * as notificationReducer from './store/notifications/notification.reducer';
+import * as notification from './store/notifications/notification.reducer';
+import * as link from './store/links/links.reducer';
 
 // Redux devtools icin (1):
 import { environment } from '../environments/environment.prod';
@@ -35,7 +36,10 @@ import { LinkComponent } from './list/link/link.component';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    StoreModule.forRoot({ notification: notificationReducer.notificationReducer }),
+    StoreModule.forRoot({
+      notification: notification.notificationReducer,
+      link: link.linkReducer
+    }),
     // Redux devtools icin (2):
     StoreDevtoolsModule.instrument({
       name: 'NgRx State',
@@ -45,4 +49,4 @@ import { LinkComponent } from './list/link/link.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

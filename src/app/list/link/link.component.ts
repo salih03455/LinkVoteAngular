@@ -12,8 +12,6 @@ export class LinkComponent implements OnInit {
   constructor() { }
   @Input() link: Link;
 
-  ngOnInit(): void {
-    console.log(this.link);
-  }
+  ngOnInit(): void {}
 
 }
