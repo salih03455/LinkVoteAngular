@@ -1,1 +1,10 @@
-<app-add-link></app-add-link>
+<div id="list">
+  <app-add-link></app-add-link>
+  <hr>
+  <app-sort-select></app-sort-select>
+  <div class="links">
+    <div *ngFor="let link of (linkList$ | async)" class="link">
+      {{ link.linkName }}
+    </div>
+  </div>
+</div>
