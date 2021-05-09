@@ -5,8 +5,8 @@ import {
 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { Notification } from '../../models/notification';
-import { getNotification } from 'src/app/store/notifications/notification.selectors';
+import { Template } from '../../models/template';
+import { GetTemplate } from 'src/app/store/template/template.selectors';
 
 @Component({
   selector: 'app-notifications',
@@ -18,11 +18,11 @@ export class NotificationsComponent implements OnInit {
 
   constructor(private store: Store) {}
   
-  notification$: Observable<Notification>;
+  notification$: Observable<Template>;
 
   ngOnInit(): void {
     // state'yi getir:
-    this.notification$ = this.store.pipe(select(getNotification));
+    this.notification$ = this.store.pipe(select(GetTemplate));
   }
   
 }

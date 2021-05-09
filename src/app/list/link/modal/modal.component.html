@@ -2,13 +2,13 @@
   <div class="modal">
     <div class="modal__header">
       <span>Remove Link</span>
-      <i>X</i>
+      <i (click)="closeModal(false, false)">X</i>
     </div>
     <div class="modal__content">
       <ng-content></ng-content>
       <div class="modal__content__buttons">
-        <button (click)="closeModal(true)">OK</button>
-        <button (click)="closeModal(false)">CANCEL</button>
+        <button (click)="closeModal(false, true)">OK</button>
+        <button (click)="closeModal(false, false)">CANCEL</button>
       </div>
     </div>
   </div>

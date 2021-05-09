@@ -11,14 +11,14 @@ import { ListComponent } from './list/list.component';
 import { AddLinkComponent } from './list/add-link/add-link.component';
 import { NotificationsComponent } from './helpers/notification/notifications.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import * as notification from './store/notifications/notification.reducer';
+import * as template from './store/template/template.reducer';
 import * as link from './store/links/links.reducer';
 
 // Redux devtools icin (1):
 import { environment } from '../environments/environment.prod';
 import { SortSelectComponent } from './list/sort-select/sort-select.component';
 import { LinkComponent } from './list/link/link.component';
-import { ModalComponent } from './helpers/modal/modal.component';
+import { ModalComponent } from './list/link/modal/modal.component';
 
 // STATES:
 
@@ -39,7 +39,7 @@ import { ModalComponent } from './helpers/modal/modal.component';
     ReactiveFormsModule,
     FormsModule,
     StoreModule.forRoot({
-      notification: notification.notificationReducer,
+      template: template.templateReducer,
       link: link.linkReducer
     }),
     // Redux devtools icin (2):

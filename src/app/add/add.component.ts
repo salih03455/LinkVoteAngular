@@ -5,7 +5,7 @@ import { SetLink } from '../store/links/links.actions';
 import {
   UpdateNotification,
   UpdateNotificationStatus
-} from '../store/notifications/notification.actions';
+} from '../store/template/template.actions';
 
 @Component({
   selector: 'app-add',
@@ -77,10 +77,10 @@ export class AddComponent implements OnInit {
     this.store.dispatch(
       UpdateNotification({
         payload: {
-          status: true,
-          title: linkObject.linkName,
-          function: 'added',
-          type: 'success'
+          notificationStatus: true,
+          notificationTitle: linkObject.linkName,
+          notificationFunction: 'added',
+          notificationType: 'success'
         }
       })
     );

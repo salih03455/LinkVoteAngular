@@ -1,5 +1,6 @@
 import {
   Component,
+  Input,
   OnDestroy,
   OnInit,
   ViewEncapsulation
@@ -19,6 +20,7 @@ export class ListComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store) {}
 
+  removedLinkName: string;
   linkList$ = new BehaviorSubject<any>([]);
   subscription: Subscription;
 
@@ -46,6 +48,11 @@ export class ListComponent implements OnInit, OnDestroy {
       },
       (error) => console.log(error)
     );
+  }
+
+  removedName(name: any) {
+    console.log(name);
+    this.removedLinkName = name;
   }
 
   ngOnDestroy(): void {

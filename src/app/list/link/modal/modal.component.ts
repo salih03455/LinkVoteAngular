@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { SetModalAction } from '../../../store/template/template.actions';
 
 @Component({
   selector: 'app-modal',
@@ -8,12 +10,14 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class ModalComponent implements OnInit {
 
-  constructor() {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {}
 
-  closeModal(status: boolean) {
-    
+  closeModal(modalStatus: boolean, modalContinue: boolean) {
+    this.store.dispatch(
+      SetModalAction({ payload: { modalStatus, modalContinue } })
+    )
   }
 
 }
