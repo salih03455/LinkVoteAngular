@@ -14,4 +14,12 @@ export class LinkComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  voteUp() {
+
+  }
+
+  voteDown() {
+    
+  }
+
 }

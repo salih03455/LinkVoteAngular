@@ -53,32 +53,97 @@ input {
 
 /* Oklar: */
 
-.arrow-left {
+.arrow-up {
+  box-sizing: border-box;
   position: relative;
   display: block;
-  width: 24px;
-  height: 24px;
-  &:before,
-  &:after {
-    content: "";
-    box-sizing: border-box;
-    position: absolute;
-    left: 3px;
-  }
-  &:before {
-    width: 16px;
-    height: 2px;
-    bottom: 10px;
-    background: #000;
-  }
-  &:after {
-    width: 8px;
-    height: 8px;
-    border-bottom: 2px solid;
-    border-left: 2px solid;
-    transform: rotate(45deg);
-    bottom: 7px;
-  }
+  transform: scale(var(--ggs,1));
+  width: 22px;
+  height: 22px
+}
+.arrow-up::after,
+.arrow-up::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  top: 4px
+}
+.arrow-up::after {
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid;
+  border-left: 2px solid;
+  transform: rotate(45deg);
+  left: 7px
+}
+.arrow-up::before {
+  width: 2px;
+  height: 16px;
+  left: 10px;
+  background: currentColor
+}
+
+.arrow-down {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs,1));
+  width: 22px;
+  height: 22px
+}
+.arrow-down::after,
+.arrow-down::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 4px
+}
+.arrow-down::after {
+  width: 8px;
+  height: 8px;
+  border-bottom: 2px solid;
+  border-left: 2px solid;
+  transform: rotate(-45deg);
+  left: 7px
+}
+.arrow-down::before {
+  width: 2px;
+  height: 16px;
+  left: 10px;
+  background: currentColor
+}
+
+.arrow-left {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs,1));
+  width: 22px;
+  height: 22px
+}
+.arrow-left::after,
+.arrow-left::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  left: 3px
+}
+.arrow-left::after {
+  width: 8px;
+  height: 8px;
+  border-bottom: 2px solid;
+  border-left: 2px solid;
+  transform: rotate(45deg);
+  bottom: 7px
+}
+.arrow-left::before {
+  width: 16px;
+  height: 2px;
+  bottom: 10px;
+  background: currentColor
 }
 
 /* Oklar son */

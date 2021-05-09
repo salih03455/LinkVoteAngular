@@ -8,11 +8,18 @@
       {{ link.linkName }}
     </div>
     <div class="link-right__url">
-      ({{ link.linkUrl }})
+      (<a [href]="link.linkUrl" target="_blank">
+        {{ link.linkUrl }}
+      </a>)
     </div>
     <div class="link-right__vote-buttons">
-      <div class="link-right__vote-buttons__up">Up Vote</div>
-      <div class="link-right__vote-buttons__down">Down Vote</div>
+      <div class="link-right__vote-buttons__up" (click)="voteUp()">
+        <i class="arrow-up"></i>Up Vote
+      </div>
+      <div class="link-right__vote-buttons__down" (click)="voteDown()">
+        <i class="arrow-down"></i>Down Vote
+      </div>
     </div>
   </div>
+  <div class="link-delete"></div>
 </div>

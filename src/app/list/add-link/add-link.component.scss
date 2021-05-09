@@ -1,13 +1,12 @@
+@import '../../../assets/styles/variables.scss';
+
 .submit-link {
-  background-color: #f7f7f7;
-  border: 1px solid #e9e9e9;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
+  @extend %box2;
   padding: 10px;
   cursor: pointer;
   font-size: 32px;
   letter-spacing: 2px;
+  align-items: center;
   i {
     display: block;
     border-radius: 5px;
