@@ -1,7 +1,9 @@
 import {
   Component,
   OnInit,
-  ViewEncapsulation
+  Output,
+  ViewEncapsulation,
+  EventEmitter
 } from '@angular/core';
 
 @Component({
@@ -14,10 +16,12 @@ export class ModalComponent implements OnInit {
 
   constructor() {}
 
+  @Output() modalEvent: EventEmitter<{modalStatus: boolean, modalContinue: boolean}> = new EventEmitter();
+
   ngOnInit(): void {}
 
   closeModal(modalStatus: boolean, modalContinue: boolean) {
-    
+    this.modalEvent.emit({ modalStatus, modalContinue });
   }
 
 }

@@ -7,10 +7,8 @@ import {
   EventEmitter
 } from '@angular/core';
 import { Link } from '../../models/link';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { UpVote, DownVote } from '../../store/links/links.actions';
-import { SetModalAction } from '../../store/template/template.actions';
-import { GetTemplate } from '../../store/template/template.selectors';
 
 @Component({
   selector: 'app-link',
@@ -23,7 +21,7 @@ export class LinkComponent implements OnInit {
   constructor(private store: Store) {}
   
   @Input() link: Link;
-  @Output() removeLinkName: EventEmitter<object> = new EventEmitter();
+  @Output() removeLink: EventEmitter<object> = new EventEmitter();
 
   ngOnInit(): void {}
 
@@ -64,9 +62,10 @@ export class LinkComponent implements OnInit {
     // this.store.dispatch(
     //   SetModalAction({ payload: { modalStatus: true } })
     // );
-    this.removeLinkName.emit({
+    this.removeLink.emit({
       removedName: name,
-      modalStatus: true
+      modalStatus: true,
+      removedId: id
     });
   }
 }

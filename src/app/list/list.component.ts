@@ -20,8 +20,8 @@ export class ListComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store) {}
 
-  removedLinkName: string;
-  modalStatus = new BehaviorSubject(false);
+  removedLink$ = new BehaviorSubject({});
+  modalStatus$ = new BehaviorSubject(false);
   linkList$ = new BehaviorSubject<any>([]);
   subscription: Subscription;
 
@@ -51,13 +51,16 @@ export class ListComponent implements OnInit, OnDestroy {
     );
   }
 
-  nameOfRemoved(event: {removedName: string, modalStatus: boolean }) {
-    this.removedLinkName = event.removedName;
-    this.modalStatus.next(event.modalStatus);
+  removeLink(event: {removedName: string, modalStatus: boolean, removedId: number }) {
+    this.removedLink$.next({ name: event.removedName, id: event.removedId });
+    this.modalStatus$.next(event.modalStatus);
   }
 
-  removedName(name: any) {
-    this.removedLinkName = name;
+  onModalEvent(event: {modalStatus: boolean, modalContinue: boolean}) {
+    this.modalStatus$.next(event.modalStatus);
+    if (event.modalContinue) {
+      console.log('devam', this.removedLink$.getValue())
+    }
   }
 
   ngOnDestroy(): void {
