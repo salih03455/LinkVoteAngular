@@ -51,22 +51,26 @@ export class AddComponent implements OnInit {
       return;
     }
 
-    const formValue = { ...this.addLinkForm.value, linkVote: 5 };
+    const linkObject = {
+      ...this.addLinkForm.value,
+      linkVote: 5,
+      linkId: Date.now()
+    };
     const linksOfStored = localStorage.getItem('LinkVoteLinks');
     // local storage'de kayit varsa:
     if (linksOfStored) {
       this.sameLink = JSON.parse(linksOfStored).some(
-        link => link.linkUrl === formValue.linkUrl
+        link => link.linkUrl === linkObject.linkUrl
       );
       // ayni link daha once kaydedildiyse tekrar kaydetme:
       if (this.sameLink) {
         return;
       }
-      const newLinksOfStored = [...JSON.parse(linksOfStored), formValue];
+      const newLinksOfStored = [...JSON.parse(linksOfStored), linkObject];
       localStorage.setItem('LinkVoteLinks', JSON.stringify(newLinksOfStored));
     } else {
       // kayit yoksa ilk kaydi ekle
-      localStorage.setItem('LinkVoteLinks', JSON.stringify([formValue]));
+      localStorage.setItem('LinkVoteLinks', JSON.stringify([linkObject]));
     }
 
     // Notification icin store'u guncelle:
@@ -74,7 +78,7 @@ export class AddComponent implements OnInit {
       UpdateNotification({
         payload: {
           status: true,
-          title: formValue.linkName,
+          title: linkObject.linkName,
           function: 'added',
           type: 'success'
         }
@@ -83,7 +87,7 @@ export class AddComponent implements OnInit {
 
     // Store'daki link listesini guncelle:
     this.store.dispatch(
-      SetLink({ payload: formValue })
+      SetLink({ payload: linkObject })
     );
 
     // Notification'u ekrandan kaldir:

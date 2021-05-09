@@ -13,10 +13,10 @@
       </a>)
     </div>
     <div class="link-right__vote-buttons">
-      <div class="link-right__vote-buttons__up" (click)="voteUp()">
+      <div class="link-right__vote-buttons__up" (click)="voteUp(link.linkId)">
         <i class="arrow-up"></i>Up Vote
       </div>
-      <div class="link-right__vote-buttons__down" (click)="voteDown()">
+      <div class="link-right__vote-buttons__down" (click)="voteDown(link.linkId)">
         <i class="arrow-down"></i>Down Vote
       </div>
     </div>

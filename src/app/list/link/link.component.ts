@@ -1,5 +1,12 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  ViewEncapsulation }
+from '@angular/core';
 import { Link } from '../../models/link';
+import { Store } from '@ngrx/store';
+import { UpVote, DownVote } from '../../store/links/links.actions';
 
 @Component({
   selector: 'app-link',
@@ -9,17 +16,42 @@ import { Link } from '../../models/link';
 })
 export class LinkComponent implements OnInit {
   
-  constructor() { }
+  constructor(private store: Store) {}
   @Input() link: Link;
 
   ngOnInit(): void {}
 
-  voteUp() {
-
+  // local storage'yi guncelle:
+  updateVote(id: number, type: string) {
+    const linksOfStorage = JSON.parse(localStorage.getItem('LinkVoteLinks'));
+    const newLinksOfStorage = linksOfStorage.map((link: Link) => {
+      if (link.linkId === id) {
+        if (type === 'increase') {
+          if (link['linkVote'] < 10) {
+            link['linkVote'] = link['linkVote'] + 1;
+          }
+        }
+        if (type === 'decrease') {
+          if (link['linkVote'] > 1) {
+            link['linkVote'] = link['linkVote'] - 1;
+          }
+        }
+      }
+      return link;
+    });
+    localStorage.setItem('LinkVoteLinks', JSON.stringify(newLinksOfStorage));
+  }
+  
+  voteUp(id: number) {
+    // store'u guncelle:
+    this.store.dispatch(UpVote({ payload: id }));
+    this.updateVote(id, 'increase');
   }
 
-  voteDown() {
-    
+  voteDown(id: number) {
+    // store'u guncelle:
+    this.store.dispatch(DownVote({ payload: id }));
+    this.updateVote(id, 'decrease');
   }
 
 }
