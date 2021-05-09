@@ -3,14 +3,14 @@ import {
   Input,
   OnInit,
   Output,
-  ViewEncapsulation }
-from '@angular/core';
+  ViewEncapsulation,
+  EventEmitter
+} from '@angular/core';
 import { Link } from '../../models/link';
 import { Store, select } from '@ngrx/store';
 import { UpVote, DownVote } from '../../store/links/links.actions';
 import { SetModalAction } from '../../store/template/template.actions';
 import { GetTemplate } from '../../store/template/template.selectors';
-import * as EventEmitter from 'events';
 
 @Component({
   selector: 'app-link',
@@ -21,21 +21,11 @@ import * as EventEmitter from 'events';
 export class LinkComponent implements OnInit {
   
   constructor(private store: Store) {}
+  
   @Input() link: Link;
-  modalStatus = false;
-  removedLinkName: string;
+  @Output() removeLinkName: EventEmitter<object> = new EventEmitter();
 
-  ngOnInit(): void {
-    const template = this.store.pipe(select(GetTemplate));
-    template.subscribe(
-      template => {
-        if (template.modalStatus) {
-          this.modalStatus = true
-        }
-      },
-      error => console.log(error)
-    )
-  }
+  ngOnInit(): void {}
 
   // local storage'yi guncelle:
   updateVote(id: number, type: string) {
@@ -71,8 +61,12 @@ export class LinkComponent implements OnInit {
   }
 
   deleteLink(id: number, name: string) {
-    this.store.dispatch(
-      SetModalAction({ payload: { modalStatus: true } })
-    )
+    // this.store.dispatch(
+    //   SetModalAction({ payload: { modalStatus: true } })
+    // );
+    this.removeLinkName.emit({
+      removedName: name,
+      modalStatus: true
+    });
   }
 }

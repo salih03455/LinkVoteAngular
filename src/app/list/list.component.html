@@ -4,12 +4,12 @@
   <app-sort-select></app-sort-select>
   <div class="links">
     <ng-container *ngFor="let link of (linkList$ | async)">
-      <app-link [link]="link"></app-link>
+      <app-link [link]="link" (removeLinkName)="nameOfRemoved($event)"></app-link>
     </ng-container>
   </div>
 </div>
 
-<app-modal>
+<app-modal *ngIf="modalStatus | async">
   <div class="modal__content__text">
     Do you want to remove:
     <span>{{ removedLinkName }}</span>

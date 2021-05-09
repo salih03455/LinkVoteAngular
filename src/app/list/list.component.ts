@@ -21,6 +21,7 @@ export class ListComponent implements OnInit, OnDestroy {
   constructor(private store: Store) {}
 
   removedLinkName: string;
+  modalStatus = new BehaviorSubject(false);
   linkList$ = new BehaviorSubject<any>([]);
   subscription: Subscription;
 
@@ -50,8 +51,12 @@ export class ListComponent implements OnInit, OnDestroy {
     );
   }
 
+  nameOfRemoved(event: {removedName: string, modalStatus: boolean }) {
+    this.removedLinkName = event.removedName;
+    this.modalStatus.next(event.modalStatus);
+  }
+
   removedName(name: any) {
-    console.log(name);
     this.removedLinkName = name;
   }
 
