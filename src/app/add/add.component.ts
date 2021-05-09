@@ -54,7 +54,7 @@ export class AddComponent implements OnInit {
     const linkObject = {
       ...this.addLinkForm.value,
       linkVote: 5,
-      linkId: Date.now()
+      linkId: Date.now() // unique id
     };
     const linksOfStored = localStorage.getItem('LinkVoteLinks');
     // local storage'de kayit varsa:

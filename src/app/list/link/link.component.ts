@@ -18,6 +18,7 @@ export class LinkComponent implements OnInit {
   
   constructor(private store: Store) {}
   @Input() link: Link;
+  removedLinkName: string;
 
   ngOnInit(): void {}
 
@@ -52,6 +53,10 @@ export class LinkComponent implements OnInit {
     // store'u guncelle:
     this.store.dispatch(DownVote({ payload: id }));
     this.updateVote(id, 'decrease');
+  }
+
+  deleteLink(id: number, name: string) {
+    this.removedLinkName = name;
   }
 
 }

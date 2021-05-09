@@ -18,6 +18,7 @@ import * as link from './store/links/links.reducer';
 import { environment } from '../environments/environment.prod';
 import { SortSelectComponent } from './list/sort-select/sort-select.component';
 import { LinkComponent } from './list/link/link.component';
+import { ModalComponent } from './helpers/modal/modal.component';
 
 // STATES:
 
@@ -29,7 +30,8 @@ import { LinkComponent } from './list/link/link.component';
     AddLinkComponent,
     NotificationsComponent,
     SortSelectComponent,
-    LinkComponent
+    LinkComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

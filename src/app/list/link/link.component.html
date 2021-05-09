@@ -13,13 +13,27 @@
       </a>)
     </div>
     <div class="link-right__vote-buttons">
-      <div class="link-right__vote-buttons__up" (click)="voteUp(link.linkId)">
+      <div
+        class="link-right__vote-buttons__up"
+        (click)="voteUp(link.linkId)">
         <i class="arrow-up"></i>Up Vote
       </div>
-      <div class="link-right__vote-buttons__down" (click)="voteDown(link.linkId)">
+      <div
+        class="link-right__vote-buttons__down"
+        (click)="voteDown(link.linkId)">
         <i class="arrow-down"></i>Down Vote
       </div>
     </div>
   </div>
-  <div class="link-delete"></div>
+  <div
+    class="link-delete"
+    (click)="deleteLink(link.linkId, link.linkName)">
+  </div>
 </div>
+
+<app-modal>
+  <div class="modal__content__text">
+    Do you want to remove:
+    <span>{{ removedLinkName }}</span>
+  </div>
+</app-modal>

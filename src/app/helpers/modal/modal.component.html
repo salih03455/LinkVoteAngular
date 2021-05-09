@@ -1,0 +1,15 @@
+<div id="modal">
+  <div class="modal">
+    <div class="modal__header">
+      <span>Remove Link</span>
+      <i>X</i>
+    </div>
+    <div class="modal__content">
+      <ng-content></ng-content>
+      <div class="modal__content__buttons">
+        <button (click)="closeModal(true)">OK</button>
+        <button (click)="closeModal(false)">CANCEL</button>
+      </div>
+    </div>
+  </div>
+</div>
