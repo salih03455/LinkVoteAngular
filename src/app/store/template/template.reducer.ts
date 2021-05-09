@@ -21,7 +21,7 @@ const _templateReducer = createReducer(
   on(
     UpdateNotificationStatus, (state, { payload }) => ({
       ...state,
-      status: payload
+      notificationStatus: payload
     })
   )
 );

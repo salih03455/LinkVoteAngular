@@ -97,7 +97,7 @@ export class AddComponent implements OnInit {
           payload: false
         })
       );
-    }, 3000);
+    }, 1500);
 
     this.submitted = false;
     this.addLinkForm.reset();

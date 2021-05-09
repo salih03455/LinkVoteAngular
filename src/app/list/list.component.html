@@ -7,6 +7,28 @@
       <app-link [link]="link" (removeLink)="removeLink($event)"></app-link>
     </ng-container>
   </div>
+  <div class="pagination" *ngIf="(pager$ | async).length">
+    <div
+      class="pagination__prev"
+      (click)="pagerNavigation('prev')"
+      [ngClass]="{disabled: this.selectedPage === 1}">
+      <i class="arrow-left"></i>
+    </div>
+    <ng-container *ngFor="let page of (pager$ | async); let i = index">
+      <div
+        class="pagination__item"
+        [ngClass]="{selected: page.selected}"
+        (click)="changeSelectedPage(i)">
+        {{ page.no }}
+      </div>
+    </ng-container>
+    <div
+      class="pagination__next"
+      (click)="pagerNavigation('next')"
+      [ngClass]="{disabled: this.selectedPage === (pager$ | async).length}">
+      <i class="arrow-right"></i>
+    </div>
+  </div>
 </div>
 
 <app-modal *ngIf="modalStatus$ | async" (modalEvent)="onModalEvent($event)">
