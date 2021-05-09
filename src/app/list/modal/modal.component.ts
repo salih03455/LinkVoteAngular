@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { SetModalAction } from '../../../store/template/template.actions';
+import { SetModalAction } from '../../store/template/template.actions';
 
 @Component({
   selector: 'app-modal',

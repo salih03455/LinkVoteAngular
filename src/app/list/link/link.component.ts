@@ -22,7 +22,6 @@ export class LinkComponent implements OnInit {
   
   constructor(private store: Store) {}
   @Input() link: Link;
-  @Output() linkName = new EventEmitter();
   modalStatus = false;
   removedLinkName: string;
 
@@ -72,7 +71,6 @@ export class LinkComponent implements OnInit {
   }
 
   deleteLink(id: number, name: string) {
-    this.linkName.emit(name);
     this.store.dispatch(
       SetModalAction({ payload: { modalStatus: true } })
     )
