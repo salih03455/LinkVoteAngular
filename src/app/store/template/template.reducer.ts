@@ -1,8 +1,7 @@
 import { Action, createReducer, on }  from '@ngrx/store';
 import {
   UpdateNotification,
-  UpdateNotificationStatus,
-  SetModalAction
+  UpdateNotificationStatus
 } from './template.actions';
 import { Template } from '../../models/template';
 
@@ -24,15 +23,6 @@ const _templateReducer = createReducer(
       ...state,
       status: payload
     })
-  ),
-  on(
-    SetModalAction, (state, { payload }) => (
-      {
-        ...state,
-        modalStatus: payload.modalStatus,
-        modalContinue: payload.modalContinue
-      }
-    )
   )
 );
 

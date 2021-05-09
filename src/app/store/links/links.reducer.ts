@@ -3,7 +3,8 @@ import {
   SetLinks,
   SetLink,
   UpVote,
-  DownVote
+  DownVote,
+  DeleteLink
 } from './links.actions';
 import { Link } from '../../models/link';
 
@@ -44,6 +45,11 @@ const _linkReducer = createReducer(
         }
         return link;
       })
+    ])
+  ),
+  on(
+    DeleteLink, (state, { payload }) => ([
+      ...state.filter(link => link.linkId !== payload)
     ])
   )
 );

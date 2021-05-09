@@ -7,8 +7,9 @@ import {
 } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { SetLinks } from '../store/links/links.actions';
+import { SetLinks, DeleteLink } from '../store/links/links.actions';
 import { GetLinks } from '../store/links/links.selectors';
+import { Link } from '../models/Link';
 
 @Component({
   selector: 'app-list',
@@ -24,6 +25,7 @@ export class ListComponent implements OnInit, OnDestroy {
   modalStatus$ = new BehaviorSubject(false);
   linkList$ = new BehaviorSubject<any>([]);
   subscription: Subscription;
+  linksOfStorage: Link[];
 
   ngOnInit(): void {
     // store'a bak:
@@ -34,17 +36,17 @@ export class ListComponent implements OnInit, OnDestroy {
           this.linkList$.next(links);
         } else {
           // locale storage'ye bak:
-          const linksOfStored = localStorage.getItem('LinkVoteLinks');
+          const linksOfLocale = localStorage.getItem('LinkVoteLinks');
           // locale storage'de kayit varsa state'ye aktar:
-          if (!linksOfStored) return;
-          const links = JSON.parse(linksOfStored);  
+          if (!linksOfLocale) return;
+          this.linksOfStorage = JSON.parse(linksOfLocale);  
           // Locale storage'den gelen linkleri store'a gonder:
           this.store.dispatch(
             SetLinks({
-              payload: links
+              payload: this.linksOfStorage
             })
           );
-          this.linkList$.next(links);
+          this.linkList$.next(this.linksOfStorage);
         }
       },
       (error) => console.log(error)
@@ -59,7 +61,14 @@ export class ListComponent implements OnInit, OnDestroy {
   onModalEvent(event: {modalStatus: boolean, modalContinue: boolean}) {
     this.modalStatus$.next(event.modalStatus);
     if (event.modalContinue) {
-      console.log('devam', this.removedLink$.getValue())
+      const removedLinkId = this.removedLink$.getValue()['id'];
+      // state'yi guncelle:
+      this.store.dispatch(
+        DeleteLink({ payload: removedLinkId })
+      );
+      // locale storage'yi guncelle:
+      this.linksOfStorage = [...this.linksOfStorage.filter(link => link.linkId !== removedLinkId)];
+      localStorage.setItem('LinkVoteLinks', JSON.stringify(this.linksOfStorage));
     }
   }
 

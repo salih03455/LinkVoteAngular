@@ -59,9 +59,6 @@ export class LinkComponent implements OnInit {
   }
 
   deleteLink(id: number, name: string) {
-    // this.store.dispatch(
-    //   SetModalAction({ payload: { modalStatus: true } })
-    // );
     this.removeLink.emit({
       removedName: name,
       modalStatus: true,

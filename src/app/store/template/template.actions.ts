@@ -10,8 +10,3 @@ export const UpdateNotificationStatus = createAction(
   '[Notification] Status Change',
   props<{ payload: boolean }>()
 );
-
-export const SetModalAction = createAction(
-  '[Modal] Status Change',
-  props<{ payload: Template }>()
-);
