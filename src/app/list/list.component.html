@@ -2,7 +2,7 @@
   <app-add-link></app-add-link>
   <hr>
   <app-sort-select></app-sort-select>
-  <div class="links">
+  <div class="links" *ngIf="(linkList$ | async).length">
     <ng-container *ngFor="let link of (linkList$ | async)">
       <app-link [link]="link" (removeLink)="removeLink($event)"></app-link>
     </ng-container>
@@ -31,7 +31,7 @@
   </div>
 </div>
 
-<app-modal *ngIf="modalStatus$ | async" (modalEvent)="onModalEvent($event)">
+<app-modal *ngIf="(modalStatus$ | async)" (modalEvent)="onModalEvent($event)">
   <div class="modal__content__text">
     Do you want to remove:
     <span>{{ (removedLink$ | async).name }}</span>

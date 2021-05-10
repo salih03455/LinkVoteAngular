@@ -22,10 +22,10 @@ export class ListComponent implements OnInit, OnDestroy {
 
   removedLink$ = new BehaviorSubject({});
   modalStatus$ = new BehaviorSubject(false);
-  linkList$ = new BehaviorSubject<any>([]);
+  linkList$ = new BehaviorSubject<Link[]>([]);
+  listOnPager$ = new BehaviorSubject<Link[]>([]);
   pager$ = new BehaviorSubject<any>([]);
   subscription: Subscription;
-  linksOfStorage: Link[];
   selectedPage = 0;
 
   ngOnInit(): void {
@@ -41,39 +41,52 @@ export class ListComponent implements OnInit, OnDestroy {
           const linksOfLocale = localStorage.getItem('LinkVoteLinks');
           // locale storage'de kayit varsa state'ye aktar:
           if (!linksOfLocale) return;
-          this.linksOfStorage = JSON.parse(linksOfLocale);
-          this.calculatePagi(this.linksOfStorage.length);
+          const linksOfStorage = JSON.parse(linksOfLocale);
+          this.calculatePagi(linksOfStorage.length);
           // Locale storage'den gelen linkleri store'a gonder:
           this.store.dispatch(
             SetLinks({
-              payload: this.linksOfStorage
+              payload: linksOfStorage
             })
           );
-          this.linkList$.next(this.linksOfStorage);
+          this.linkList$.next(linksOfStorage);
         }
       },
       (error) => console.log(error)
     );
   }
 
+  // Hover'da cikan sil butonuna tikladiginda:
   removeLink(event: {removedName: string, modalStatus: boolean, removedId: number }) {
     this.removedLink$.next({ name: event.removedName, id: event.removedId });
     this.modalStatus$.next(event.modalStatus);
   }
 
+  // Modal uzerinde tamam yada vazgec butonlarina basildiginda:
   onModalEvent(event: {modalStatus: boolean, modalContinue: boolean}) {
     this.modalStatus$.next(event.modalStatus);
     if (event.modalContinue) {
       const removedLinkId = this.removedLink$.getValue()['id'];
+      console.log('removed link id', removedLinkId);
+      
+      // locale storage'yi guncelle:
+      const linksOfLocale = localStorage.getItem('LinkVoteLinks');
+      if (!linksOfLocale) return;
+
+      const linksOfStorage = JSON.parse(linksOfLocale).filter(link => link.linkId !== removedLinkId);
+      console.log(linksOfStorage);
+      if (linksOfStorage.length) {
+        localStorage.setItem('LinkVoteLinks', JSON.stringify(linksOfStorage));
+      } else {
+        localStorage.setItem('LinkVoteLinks', '[]');
+      }
+
       // state'yi guncelle:
       this.store.dispatch(
         DeleteLink({ payload: removedLinkId })
       );
-      // locale storage'yi guncelle:
-      this.linksOfStorage = [...this.linksOfStorage.filter(link => link.linkId !== removedLinkId)];
-      localStorage.setItem('LinkVoteLinks', JSON.stringify(this.linksOfStorage));
       
-      this.calculatePagi(this.linksOfStorage.length);
+      this.calculatePagi(linksOfStorage.length);
     }
   }
 

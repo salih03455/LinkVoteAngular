@@ -40,7 +40,7 @@ const _linkReducer = createReducer(
       ...state.map(link => {
         if (link['linkId'] === payload) {
           if (link['linkVote'] > 1) {
-            return {...link, linkVote: link.linkVote + -1};
+            return {...link, linkVote: link.linkVote - 1};
           }
         }
         return link;
@@ -48,9 +48,9 @@ const _linkReducer = createReducer(
     ])
   ),
   on(
-    DeleteLink, (state, { payload }) => ([
-      ...state.filter(link => link.linkId !== payload)
-    ])
+    DeleteLink, (state, { payload }) => (
+      state.filter(link => link['linkId'] !== payload)
+    )
   )
 );
 
