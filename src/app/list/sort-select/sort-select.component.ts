@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, EventEmitter, Output, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-sort-select',
@@ -8,10 +8,11 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 export class SortSelectComponent {
 
-  constructor() { }
+  constructor(private cd: ChangeDetectorRef) { }
 
+  @Output() sortBy: EventEmitter<number> = new EventEmitter();
   onChange(value: number) {
-    console.log('value: ', value);
+    this.sortBy.emit(value);
+    this.cd.detach();
   }
-
 }

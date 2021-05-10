@@ -1,3 +1,9 @@
 #sortSelect {
   margin-bottom: 10px;
+  select {
+    width: 250px;
+    padding: 5px;
+    border-color: #ccc;
+    border-radius: 5px;
+  }
 }

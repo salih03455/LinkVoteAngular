@@ -26,6 +26,10 @@ button {
   @extend %button;
 }
 
+select {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
 input {
   font-family: 'Noto Sans KR', sans-serif;
   &::placeholder {

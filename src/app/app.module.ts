@@ -19,6 +19,7 @@ import { environment } from '../environments/environment.prod';
 import { SortSelectComponent } from './list/sort-select/sort-select.component';
 import { LinkComponent } from './list/link/link.component';
 import { ModalComponent } from './list/modal/modal.component';
+import { SortPipe } from './sort.pipe';
 
 // STATES:
 
@@ -31,7 +32,8 @@ import { ModalComponent } from './list/modal/modal.component';
     NotificationsComponent,
     SortSelectComponent,
     LinkComponent,
-    ModalComponent
+    ModalComponent,
+    SortPipe
   ],
   imports: [
     BrowserModule,

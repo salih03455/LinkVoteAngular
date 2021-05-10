@@ -23,5 +23,5 @@ export const DownVote = createAction(
 
 export const DeleteLink = createAction(
   '[Link] Delete',
-  props<{ payload: number }>()
+  props<{ payload: Link[] }>()
 );

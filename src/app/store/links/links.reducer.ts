@@ -48,9 +48,9 @@ const _linkReducer = createReducer(
     ])
   ),
   on(
-    DeleteLink, (state, { payload }) => (
-      state.filter(link => link['linkId'] !== payload)
-    )
+    DeleteLink, (state, { payload }) => ([
+      ...payload
+    ])
   )
 );
 
