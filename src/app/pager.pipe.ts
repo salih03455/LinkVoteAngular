@@ -6,11 +6,9 @@ import { Link } from './models/Link';
 })
 export class PagerPipe implements PipeTransform {
 
-  transform(value: Link[], args: unknown[]): unknown {
+  transform(value: Link[], arg: number[]): Link[] {
     const links = [...value];
-    return value.filter((link: Link, index) => {
-      return link;
-    });
+    return links.filter((_, index) => arg[0] <= index && index < arg[1]);
   }
 
 }

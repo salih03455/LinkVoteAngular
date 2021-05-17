@@ -35,7 +35,7 @@ export class ListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // store'a bak:
     const linksOfState = this.store.pipe(select(GetLinks));
-    
+
     this.subscription = linksOfState.subscribe(
       (links) => {
         if (links.length) {
@@ -140,7 +140,7 @@ export class ListComponent implements OnInit, OnDestroy {
         this.groupPager.push(listOnPager); // sayfalara bolunmus liste
         if (this.selectedPage === i) {
           this.listOnPager$.next([...listOnPager]); // goruntulenecek bolum
-          this.range = [i * 5, (i * 5) + 5];
+          this.range = [startOfSlice, startOfSlice + 5];
         }
         this.pager$.next([...pager]);
         startOfSlice = startOfSlice + 5;
