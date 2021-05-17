@@ -24,9 +24,7 @@ export class ListComponent implements OnInit, OnDestroy {
   removedLink$ = new BehaviorSubject({});
   modalStatus$ = new BehaviorSubject(false);
   linkList$ = new BehaviorSubject<Link[]>([]);
-  listOnPager$ = new BehaviorSubject<Link[]>([]);
   range = [0, 5];
-  groupPager = [];
   pager$ = new BehaviorSubject<any>([]);
   subscription: Subscription;
   selectedPage = 0;
@@ -119,8 +117,6 @@ export class ListComponent implements OnInit, OnDestroy {
     if (linksCount < 6) {
       pageCount = 1;
       this.pager$.next([{ no: 1, selected: true }]);
-      this.listOnPager$.next([...linksAll]);
-      this.groupPager.push(linksAll);
       this.range = [0, 5];
       return;
     } else {
@@ -136,10 +132,7 @@ export class ListComponent implements OnInit, OnDestroy {
       let startOfSlice = 0; // tum linkler arrayinin kacincidan itibaren kesilecegini belirtir
       for (let i = 1; i <= pageCount; i++) {
         pager.push({ no: i, selected: this.selectedPage === i ? true : false });
-        const listOnPager = linksAll.slice(startOfSlice, startOfSlice + 5);
-        this.groupPager.push(listOnPager); // sayfalara bolunmus liste
         if (this.selectedPage === i) {
-          this.listOnPager$.next([...listOnPager]); // goruntulenecek bolum
           this.range = [startOfSlice, startOfSlice + 5];
         }
         this.pager$.next([...pager]);
@@ -162,9 +155,6 @@ export class ListComponent implements OnInit, OnDestroy {
     }
     pager[this.selectedPage - 1]['selected'] = true;
     this.pager$.next([...pager]);
-    
-    const listOnPager = this.groupPager[this.selectedPage - 1];
-    this.listOnPager$.next([...listOnPager]);
   }
 
   // pagination'da sayfalara tiklandiginda:
@@ -174,9 +164,6 @@ export class ListComponent implements OnInit, OnDestroy {
     pager[i]['selected'] = true;
     this.selectedPage = i + 1;
     this.pager$.next([...pager]);
-
-    const listOnPager = this.groupPager[this.selectedPage - 1]; // hangi sayfada ise ona ait linkleri getir
-    this.listOnPager$.next([...listOnPager]);
     this.range = [i * 5, (i * 5) + 5];
   }
 
