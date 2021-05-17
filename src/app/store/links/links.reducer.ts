@@ -27,9 +27,7 @@ const _linkReducer = createReducer(
     UpVote, (state, { payload }) => ([
       ...state.map(link => {
         if (link['linkId'] === payload) {
-          if (link['linkVote'] < 10) {
-            return {...link, linkVote: link.linkVote + 1};
-          }
+          return {...link, linkVote: link.linkVote + 1};
         }
         return link;
       })
@@ -39,9 +37,7 @@ const _linkReducer = createReducer(
     DownVote, (state, { payload }) => ([
       ...state.map(link => {
         if (link['linkId'] === payload) {
-          if (link['linkVote'] > 1) {
-            return {...link, linkVote: link.linkVote - 1};
-          }
+          return {...link, linkVote: link.linkVote - 1};
         }
         return link;
       })

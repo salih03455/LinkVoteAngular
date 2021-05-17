@@ -31,14 +31,10 @@ export class LinkComponent implements OnInit {
     const newLinksOfStorage = linksOfStorage.map((link: Link) => {
       if (link.linkId === id) {
         if (type === 'increase') {
-          if (link['linkVote'] < 10) {
-            link['linkVote'] = link['linkVote'] + 1;
-          }
+          link['linkVote'] = link['linkVote'] + 1;
         }
         if (type === 'decrease') {
-          if (link['linkVote'] > 1) {
-            link['linkVote'] = link['linkVote'] - 1;
-          }
+          link['linkVote'] = link['linkVote'] - 1;
         }
       }
       return link;

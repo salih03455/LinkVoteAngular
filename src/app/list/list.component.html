@@ -2,15 +2,15 @@
   <app-add-link></app-add-link>
   <hr>
   <app-sort-select (sortBy)="setSortPipe($event)"></app-sort-select>
-  <div class="links" *ngIf="(listOnPager$ | async).length; else empty">
-    <ng-container *ngFor="let link of (listOnPager$ | async) | sort:(sortArg | async)">
+  <div class="links" *ngIf="(linkList$ | async).length; else empty">
+    <ng-container *ngFor="let link of (linkList$ | async) | sort:(sortArg | async) | pager:range">
       <app-link [link]="link" (removeLink)="removeLink($event)"></app-link>
     </ng-container>
   </div>
   <ng-template #empty>
     <h4>Hic link bulunamadı!</h4>
   </ng-template>
-  <div class="pagination" *ngIf="(listOnPager$ | async).length">
+  <div class="pagination" *ngIf="(linkList$ | async).length">
     <div
       class="pagination__prev"
       (click)="pagerNavigation('prev')"

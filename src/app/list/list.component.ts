@@ -25,6 +25,7 @@ export class ListComponent implements OnInit, OnDestroy {
   modalStatus$ = new BehaviorSubject(false);
   linkList$ = new BehaviorSubject<Link[]>([]);
   listOnPager$ = new BehaviorSubject<Link[]>([]);
+  range = [0, 5];
   groupPager = [];
   pager$ = new BehaviorSubject<any>([]);
   subscription: Subscription;
@@ -120,6 +121,7 @@ export class ListComponent implements OnInit, OnDestroy {
       this.pager$.next([{ no: 1, selected: true }]);
       this.listOnPager$.next([...linksAll]);
       this.groupPager.push(linksAll);
+      this.range = [0, 5];
       return;
     } else {
       const remaining = linksCount % itemPerGroup;
@@ -138,6 +140,7 @@ export class ListComponent implements OnInit, OnDestroy {
         this.groupPager.push(listOnPager); // sayfalara bolunmus liste
         if (this.selectedPage === i) {
           this.listOnPager$.next([...listOnPager]); // goruntulenecek bolum
+          this.range = [i * 5, (i * 5) + 5];
         }
         this.pager$.next([...pager]);
         startOfSlice = startOfSlice + 5;
@@ -149,10 +152,14 @@ export class ListComponent implements OnInit, OnDestroy {
   pagerNavigation(direction: string) {
     const pager = this.pager$.getValue();
     pager[this.selectedPage -1]['selected'] = false;
-    if (direction === 'next')
+    if (direction === 'next') {
       this.selectedPage = this.selectedPage + 1;
-    else
+      this.range = [this.range[0] + 5, this.range[1] + 5];
+    }
+    else {
       this.selectedPage = this.selectedPage - 1;
+      this.range = [this.range[0] - 5, this.range[1] - 5];
+    }
     pager[this.selectedPage - 1]['selected'] = true;
     this.pager$.next([...pager]);
     
@@ -170,6 +177,7 @@ export class ListComponent implements OnInit, OnDestroy {
 
     const listOnPager = this.groupPager[this.selectedPage - 1]; // hangi sayfada ise ona ait linkleri getir
     this.listOnPager$.next([...listOnPager]);
+    this.range = [i * 5, (i * 5) + 5];
   }
 
   ngOnDestroy(): void {

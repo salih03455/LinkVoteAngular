@@ -20,6 +20,7 @@ import { SortSelectComponent } from './list/sort-select/sort-select.component';
 import { LinkComponent } from './list/link/link.component';
 import { ModalComponent } from './list/modal/modal.component';
 import { SortPipe } from './sort.pipe';
+import { PagerPipe } from './pager.pipe';
 
 // STATES:
 
@@ -33,7 +34,8 @@ import { SortPipe } from './sort.pipe';
     SortSelectComponent,
     LinkComponent,
     ModalComponent,
-    SortPipe
+    SortPipe,
+    PagerPipe
   ],
   imports: [
     BrowserModule,
